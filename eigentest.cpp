@@ -10,4 +10,7 @@ int main()
   vals(3,3,1) = 6;
   vals(6,6,2) = 5;
 
-  cout<<va
+  cout<<vals<<"\n";
+
+  return 0;
+}
