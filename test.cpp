@@ -23,7 +23,11 @@ int main(int argc, char* argv[])
   //get matrix size
   int matsize = (((float)smax-smin)/ds) - fmod((smax-smin)/ds,1);
   
+  //DEBUG: show matsize
+  //cout<<matsize<<"\n";  
+
   //get mindpoint of matrix for circle
+  float mid = (matsize/2.0) - (fmod(matsize,2.0));
   float vals[matsize][matsize][iter];
   
   int row,column,depth;
@@ -35,17 +39,22 @@ int main(int argc, char* argv[])
 	{
 	  for(column=0;column<matsize;column++)
 	    {
-	      if(row==0)
-		vals[row][column][depth]=1;
-	      else if(row==matsize-1)
-		vals[row][column][depth]=-1;
-	      else
-		{
-		  vals[row][column][depth]=0;
-		}
+              if(pow((row-mid),2.0) < pow(r,2.0))
+                vals[row][column][depth]=0;
+              else
+              {
+	        if(row==0)
+		  vals[row][column][depth]=1;
+	        else if(row==matsize-1)
+		  vals[row][column][depth]=-1;
+	        else
+		  {
+		    vals[row][column][depth]=0;
+		  }
+	      }
 	    }
-	}
     }
+}
   
   //open file to write data to
   ofstream datafile;
@@ -57,18 +66,25 @@ int main(int argc, char* argv[])
 	{
 	  for(column=0;column<matsize;column++)
 	    {
-	      if(column==0)
-		{
-		  vals[row][column][depth] = (vals[row-1][column][depth-1]+vals[row+1][column][depth-1]+vals[row][column+1][depth-1])/3.00;
-		}
-	      else if(column==matsize)
-		{
-		  vals[row][column][depth] = (vals[row-1][column][depth-1]+vals[row+1][column][depth-1]+vals[row][column-1][depth-1])/3.00;
-		}
+	      if(pow((row-mid+0.00),2.0)<pow(r+0.00,2.0) && pow((column-mid+0.00),2.0)<pow(r+0.00,2.0))
+	      {
+                  vals[row][column][depth]=0;
+              }
 	      else
-		{
-		  vals[row][column][depth] = 0.25*(vals[row+1][column][depth-1]+vals[row-1][column][depth-1]+vals[row][column+1][depth-1]+vals[row][column-1][depth-1]);
-		}
+              {
+                if(column==0)
+		  {
+		    vals[row][column][depth] = (vals[row-1][column][depth-1]+vals[row+1][column][depth-1]+vals[row][column+1][depth-1])/3.00;
+		  }  
+	        else if(column==matsize)
+		  {
+		    vals[row][column][depth] = (vals[row-1][column][depth-1]+vals[row+1][column][depth-1]+vals[row][column-1][depth-1])/3.00;
+		  }
+	        else
+		  {
+		    vals[row][column][depth] = 0.25*(vals[row+1][column][depth-1]+vals[row-1][column][depth-1]+vals[row][column+1][depth-1]+vals[row][column-1][depth-1]);
+		  }
+               }
             }
 	}
     }
@@ -79,7 +95,9 @@ int main(int argc, char* argv[])
       for(row=0;row<matsize;row++)
 	{
 	  datafile<<row<<" "<<column<<" "<<vals[row][column][iter-2]<<"\n";
+          cout<<vals[row][column][iter-2]<<" ";
 	}
+	cout<<"\n";
     }
   datafile.close(); 
    
