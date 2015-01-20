@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include <Eigen/Eigen>
+#include <fstream>
 #include <cmath>
 
 using namespace std;
@@ -23,70 +23,65 @@ int main(int argc, char* argv[])
   //get matrix size
   int matsize = (((float)smax-smin)/ds) - fmod((smax-smin)/ds,1);
   
+  //get mindpoint of matrix for circle
   float vals[matsize][matsize][iter];
   
-  int i,j,k;
+  int row,column,depth;
   
   //generate initial matrix
-  for(k=0;k<iter;k++)
+  for(depth=0;depth<iter;depth++)
     {
-      for(i=0;i<matsize;i++)
+      for(row=0;row<matsize;row++)
 	{
-	  for(j=0;j<matsize;j++)
+	  for(column=0;column<matsize;column++)
 	    {
-	      if(i==0)
-		vals[i][j][k]=1;
-	      else if(i==matsize-1)
-		vals[i][j][k]=-1;
+	      if(row==0)
+		vals[row][column][depth]=1;
+	      else if(row==matsize-1)
+		vals[row][column][depth]=-1;
 	      else
 		{
-		  vals[i][j][k]=0;
+		  vals[row][column][depth]=0;
 		}
 	    }
 	}
     }
   
-  //print matrix
-  /*for(i=0;i<=matsize-1;i++)
-    {
-    for(j=0;j<=matsize-1;j++)
-    {
-    cout<<vals[i][j][0]<<" ";
-    }
-    cout<<"\n";
-    }*/
+  //open file to write data to
+  ofstream datafile;
+
   //run algorithm to get average of values
-  for(k=1;k<iter;k++)
+  for(depth=1;depth<iter;depth++)
     {
-      for(i=1;i<matsize-1;i++)
+      for(row=1;row<matsize-1;row++)
 	{
-	  for(j=0;j<matsize;j++)
+	  for(column=0;column<matsize;column++)
 	    {
-	      if(j==0)
+	      if(column==0)
 		{
-		  vals[i][j][k] = (vals[i-1][j][k-1]+vals[i+1][j][k-1]+vals[i][j+1][k-1])/3.00;
+		  vals[row][column][depth] = (vals[row-1][column][depth-1]+vals[row+1][column][depth-1]+vals[row][column+1][depth-1])/3.00;
 		}
-	      else if(j==matsize)
+	      else if(column==matsize)
 		{
-		  vals[i][j][k] = (vals[i-1][j][k-1]+vals[i+1][j][k-1]+vals[i][j-1][k-1])/3.00;
+		  vals[row][column][depth] = (vals[row-1][column][depth-1]+vals[row+1][column][depth-1]+vals[row][column-1][depth-1])/3.00;
 		}
 	      else
 		{
-		  vals[i][j][k] = 0.25*(vals[i+1][j][k-1]+vals[i-1][j][k-1]+vals[i][j+1][k-1]+vals[i][j-1][k-1]);
+		  vals[row][column][depth] = 0.25*(vals[row+1][column][depth-1]+vals[row-1][column][depth-1]+vals[row][column+1][depth-1]+vals[row][column-1][depth-1]);
 		}
-	    }
+            }
 	}
     }
   
-  for(i=0;i<matsize;i++)
+  datafile.open("the_datafile.dat");
+  for(column=0;column<matsize;column++)
     {
-      for(j=0;j<matsize;j++)
+      for(row=0;row<matsize;row++)
 	{
-	  cout<<vals[i][j][iter-2]<<" ";
+	  datafile<<row<<" "<<column<<" "<<vals[row][column][iter-2]<<"\n";
 	}
-      cout<<"\n";
     }
-  
-  
+  datafile.close(); 
+   
   return 0;
 }
