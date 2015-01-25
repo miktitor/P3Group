@@ -5,10 +5,13 @@
 
 using namespace std;
 
+//function prototypes
+float cf(float matind,float min,float ds);
+
 int main(int argc, char* argv[]) {
 
 if(argc<2) {
-cout<<"Usage: ./test [Min x/y val][Max x/y val][x/y divisions (ds)][Circle Radius][No. Iterations]\n";
+cout<<"Usage: ./main [Min x/y val][Max x/y val][x/y divisions (ds)][Circle Radius][No. Iterations]\n";
 return 1;
 }
   
@@ -29,21 +32,21 @@ int row,column,i;
   
 //generate initial matrix
 for(row=0;row<matsize;row++) {
-	for(column=0;column<matsize;column++) {
-		if(column==0) {
-			vals[row][column][0]=vals[row][column][1]=1;
-		}
-	        else if(column==matsize-1) {
-			vals[row][column][0]=vals[row][column][1]=-1;
-		}
-		else if( (pow((row-mid),2.0) + pow((column-mid),2.0)) < pow(r,2.0) ) {
-			vals[row][column][0]=vals[row][column][1]=0;
-		}
-		else {
-			vals[row][column][0]=vals[row][column][1]=0;
-		}
+  for(column=0;column<matsize;column++) {
+    if(column==0) {
+      vals[row][column][0]=vals[row][column][1]=10;
+      }
+      else if(column==matsize-1) {
+	vals[row][column][0]=vals[row][column][1]=5;
+      }
+      else if( (pow((cf(row,smin,ds)-cf(mid,smin,ds)),2.0) + pow((cf(column,smin,ds)-cf(mid,smin,ds)),2.0)) < pow(r,2.0) ) {
+	vals[row][column][0]=vals[row][column][1]=0;
+      }
+      else {
+	vals[row][column][0]=vals[row][column][1]=0;
+      }
 	
-	}
+  }
 }
   
 //open file to write data to
@@ -51,34 +54,33 @@ ofstream datafile;
 
 //run algorithm to get average of values
 for(i=0;i<iter;i++) {
-	for(row=0;row<matsize;row++) {
-		for(column=1;column<matsize-1;column++) {
-			if(row==0) {
-				vals[row][column][-(i%2)+1] = (vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]+vals[row+1][column][(i%2)])/3.00;
-			}
-		        else if(row==matsize-1) {
-				vals[row][column][-(i%2)+1] = (vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]+vals[row-1][column][(i%2)])/3.00;
-			}
-			else if( (pow((row-mid),2.0) + pow((column-mid),2.0)) < pow(r,2.0) ) {
-				vals[row][column][-(i%2)+1]=0;
-			}
-			else {
-				vals[row][column][-(i%2)+1] = 0.25*(vals[row+1][column][(i%2)]+vals[row-1][column][(i%2)]+vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]);
-			}
-		
-		}
-	}
+  for(row=0;row<matsize;row++) {
+    for(column=1;column<matsize-1;column++) {
+      if(row==0) {
+	vals[row][column][-(i%2)+1] = (vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]+vals[row+1][column][(i%2)])/3.00;
+      }
+      else if(row==matsize-1) {
+	vals[row][column][-(i%2)+1] = (vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]+vals[row-1][column][(i%2)])/3.00;
+      }
+      else if( (pow((cf(row,smin,ds)-cf(mid,smin,ds)),2.0) + pow((cf(column,smin,ds)-cf(mid,smin,ds)),2.0)) < pow(r,2.0) ) {
+	vals[row][column][-(i%2)+1]=0;
+      }
+      else {
+	vals[row][column][-(i%2)+1] = 0.25*(vals[row+1][column][(i%2)]+vals[row-1][column][(i%2)]+vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]);
+      }		
+    }
+  }
 }
   
 datafile.open("the_datafile.dat");
 
 for(row=0;row<matsize;row++) {
-	for(column=0;column<matsize;column++) {
-		datafile<<row<<" "<<column<<" "<<vals[row][column][((i%2)==0)?0:1]<<"\n";
-		//cout<<vals[row][column][((i%2)==0)?0:1]<<" ";
-	}
-	//cout<<"\n";
-	datafile<<"\n";
+  for(column=0;column<matsize;column++) {
+    datafile<<row<<" "<<column<<" "<<vals[row][column][((i%2)==0)?0:1]<<"\n";
+    //cout<<vals[row][column][((i%2)==0)?0:1]<<" ";
+  }
+  //cout<<"\n";
+  datafile<<"\n";
 }
 
 
@@ -87,5 +89,11 @@ datafile.close();
 
 return 0;
 
+}
+
+//CoordiFy converts the matrix location of a point into its physical coordinate
+float cf(float matind,float min,float ds){
+  //matind = index of value in array, min = min true coord value, ds = coord division
+  return min + (ds*matind);
 }
 
