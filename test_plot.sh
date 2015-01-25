@@ -11,6 +11,6 @@ set output "test.eps"
 unset surface
 set title ""
  set cntrparam levels 200
-splot "the_datafile.dat" using 2:1:3 with lines notitle	# line for contour plot
+splot "the_datafile.dat" using 2:1:3 with image notitle	# line for contour plot
 EOF
 

@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <fstream>
 #include <cmath>
+#include "sublayer.h"
 
 using namespace std;
 
 //function prototypes
 float cf(float matind,float min,float ds);
+float grad(float right,float left,float up,float down,float ds);
 
 int main(int argc, char* argv[]) {
 
@@ -26,7 +28,7 @@ int matsize = (((float)smax-smin)/ds) - fmod((smax-smin)/ds,1);
 
 //get mindpoint of matrix for circle
 float mid = (matsize/2.0) - (fmod(matsize,2.0));
-float vals[matsize][matsize][2];
+float vals[matsize][matsize][3]; //made 3 for array of grad values
   
 int row,column,i;
   
@@ -34,10 +36,10 @@ int row,column,i;
 for(row=0;row<matsize;row++) {
   for(column=0;column<matsize;column++) {
     if(column==0) {
-      vals[row][column][0]=vals[row][column][1]=10;
+      vals[row][column][0]=vals[row][column][1]=1;
       }
       else if(column==matsize-1) {
-	vals[row][column][0]=vals[row][column][1]=5;
+	vals[row][column][0]=vals[row][column][1]=-1;
       }
       else if( (pow((cf(row,smin,ds)-cf(mid,smin,ds)),2.0) + pow((cf(column,smin,ds)-cf(mid,smin,ds)),2.0)) < pow(r,2.0) ) {
 	vals[row][column][0]=vals[row][column][1]=0;
@@ -52,21 +54,37 @@ for(row=0;row<matsize;row++) {
 //open file to write data to
 ofstream datafile;
 
+//define position values for ease of use
+float up,down,left,right;
+
 //run algorithm to get average of values
 for(i=0;i<iter;i++) {
   for(row=0;row<matsize;row++) {
     for(column=1;column<matsize-1;column++) {
+      //get position values for step
+      up    = vals[row-1][column][i%2];
+      down  = vals[row+1][column][i%2];
+      left  = vals[row][column-1][i%2];
+      right = vals[row][column+1][i%2];
+      //do check on gradient to see how it's changing
+      //if(row>0 && row<matsize-1){
+	//vals[row][column][2] = grad(right,left,up,down,ds);
+      //}
       if(row==0) {
-	vals[row][column][-(i%2)+1] = (vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]+vals[row+1][column][(i%2)])/3.00;
+	vals[row][column][-(i%2)+1] = (left+right+down)/3.00;
+	vals[row][column][2] = grad(right,left,0,down,ds);
       }
-      else if(row==matsize-1) {
-	vals[row][column][-(i%2)+1] = (vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]+vals[row-1][column][(i%2)])/3.00;
+      else if(row==0 || row==matsize-1) {
+	vals[row][column][-(i%2)+1] = (left+right+up)/3.00;
+	vals[row][column][2] = grad(right,left,up,0,ds);
       }
       else if( (pow((cf(row,smin,ds)-cf(mid,smin,ds)),2.0) + pow((cf(column,smin,ds)-cf(mid,smin,ds)),2.0)) < pow(r,2.0) ) {
 	vals[row][column][-(i%2)+1]=0;
+	vals[row][column][2] = grad(right,left,up,down,ds);
       }
       else {
-	vals[row][column][-(i%2)+1] = 0.25*(vals[row+1][column][(i%2)]+vals[row-1][column][(i%2)]+vals[row][column+1][(i%2)]+vals[row][column-1][(i%2)]);
+	vals[row][column][-(i%2)+1] = 0.25*(left+right+up+down);
+	vals[row][column][2] = grad(right,left,up,down,ds);
       }		
     }
   }
@@ -76,7 +94,8 @@ datafile.open("the_datafile.dat");
 
 for(row=0;row<matsize;row++) {
   for(column=0;column<matsize;column++) {
-    datafile<<row<<" "<<column<<" "<<vals[row][column][((i%2)==0)?0:1]<<"\n";
+    datafile<<cf(row,smin,ds)<<" "<<cf(column,smin,ds)<<" "<<vals[row][column][2]<<"\n";
+    //datafile<<row<<" "<<column<<" "<<vals[row][column][((i%2)==0)?0:1]<<"\n";
     //cout<<vals[row][column][((i%2)==0)?0:1]<<" ";
   }
   //cout<<"\n";
@@ -97,3 +116,23 @@ float cf(float matind,float min,float ds){
   return min + (ds*matind);
 }
 
+//Check on gradient. Returns a value based on 4 surrounding points (needs some tweaking in order to calibrate tolerance)
+float grad(float right,float left,float up,float down,float ds){
+  float result = pow(pow((right-left)/ds,2.00)+pow((down-up)/ds,2.00),0.50);
+  
+  /*for now, return result to see values
+  if(result>100 || result<0.001){
+    return 0;
+  }
+  else{
+    return result;
+  }*/
+
+  if (result>0.25){
+      return 1;
+    }
+    else{
+      return 0;
+    }
+  
+}
