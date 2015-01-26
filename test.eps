@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: test.eps
 %%Creator: gnuplot 4.6 patchlevel 0
-%%CreationDate: Sun Jan 25 14:43:53 2015
+%%CreationDate: Mon Jan 26 18:55:40 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 554 770
 %%Orientation: Landscape
@@ -434,7 +434,7 @@ SDict begin [
   /Author (johnrcc)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Sun Jan 25 14:43:53 2015)
+  /CreationDate (Mon Jan 26 18:55:40 2015)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -452,6 +452,51 @@ doclip
 newpath
 (Helvetica) findfont 140 scalefont setfont
 BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
+gsave % colour palette begin
+/maxcolors 0 def
+/HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
+  { /HSVs exch def /HSVv exch def 6.0 mul dup floor dup 3 1 roll sub
+     /HSVf exch def /HSVi exch cvi def /HSVp HSVv 1.0 HSVs sub mul def
+	 /HSVq HSVv 1.0 HSVs HSVf mul sub mul def 
+	 /HSVt HSVv 1.0 HSVs 1.0 HSVf sub mul sub mul def
+	 /HSVi HSVi 6 mod def 0 HSVi eq {HSVv HSVt HSVp}
+	 {1 HSVi eq {HSVq HSVv HSVp}{2 HSVi eq {HSVp HSVv HSVt}
+	 {3 HSVi eq {HSVp HSVq HSVv}{4 HSVi eq {HSVt HSVp HSVv}
+	 {HSVv HSVp HSVq} ifelse} ifelse} ifelse} ifelse} ifelse
+  } ifelse} def
+/Constrain {
+  dup 0 lt {0 exch pop}{dup 1 gt {1 exch pop} if} ifelse} def
+/YIQ2RGB {
+  3 copy -1.702 mul exch -1.105 mul add add Constrain 4 1 roll
+  3 copy -0.647 mul exch -0.272 mul add add Constrain 5 1 roll
+  0.621 mul exch -0.956 mul add add Constrain 3 1 roll } def
+/CMY2RGB {  1 exch sub exch 1 exch sub 3 2 roll 1 exch sub 3 1 roll exch } def
+/XYZ2RGB {  3 copy -0.9017 mul exch -0.1187 mul add exch 0.0585 mul exch add
+  Constrain 4 1 roll 3 copy -0.0279 mul exch 1.999 mul add exch
+  -0.9844 mul add Constrain 5 1 roll -0.2891 mul exch -0.5338 mul add
+  exch 1.91 mul exch add Constrain 3 1 roll} def
+/SelectSpace {ColorSpace (HSV) eq {HSV2RGB}{ColorSpace (XYZ) eq {
+  XYZ2RGB}{ColorSpace (CMY) eq {CMY2RGB}{ColorSpace (YIQ) eq {YIQ2RGB}
+  if} ifelse} ifelse} ifelse} def
+/InterpolatedColor false def
+/cF7 {sqrt} bind def	% sqrt(x)
+/cF5 {dup dup mul mul} bind def	% x^3
+/cF15 {360 mul sin} bind def	% sin(360x)
+/pm3dround {maxcolors 0 gt {dup 1 ge
+	{pop 1} {maxcolors mul floor maxcolors 1 sub div} ifelse} if} def
+/pm3dGamma 1.0 1.5 Gamma mul div def
+/ColorSpace (RGB) def
+Color InterpolatedColor or { % COLOUR vs. GRAY map
+  InterpolatedColor { %% Interpolation vs. RGB-Formula
+    /g {stroke pm3dround /grayv exch def interpolate
+        SelectSpace setrgbcolor} bind def
+  }{
+  /g {stroke pm3dround dup cF7 Constrain exch dup cF5 Constrain exch cF15 Constrain 
+       SelectSpace setrgbcolor} bind def
+  } ifelse
+}{
+  /g {stroke pm3dround pm3dGamma exp setgray} bind def
+} ifelse
 1.000 UL
 LTb
 3600 4340 M
@@ -460,1168 +505,196 @@ LTb
 % Begin plot #1
 1.000 UL
 LT0
-1.000 UL
-LT0
-1.000 UL
-LT1
-1098 4050 M
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-stroke
-LT2
-1273 4050 M
-0 -81 V
--1 -80 V
--2 -81 V
--2 -80 V
--2 -81 V
--2 -81 V
--3 -80 V
--3 -81 V
--3 -80 V
--3 -81 V
--3 -80 V
--2 -81 V
--3 -80 V
--2 -81 V
--2 -80 V
--1 -81 V
--1 -80 V
--1 -81 V
-0 -80 V
-0 -80 V
-1 -81 V
-1 -80 V
-2 -81 V
-2 -80 V
-2 -81 V
-3 -80 V
-3 -81 V
-3 -80 V
-3 -81 V
-4 -80 V
-3 -81 V
-3 -80 V
-3 -81 V
-3 -81 V
-3 -80 V
-2 -81 V
-1 -80 V
-1 -81 V
-1 -80 V
-stroke
-LT3
-1449 4050 M
--1 -81 V
--2 -80 V
--3 -81 V
--4 -80 V
--4 -81 V
--5 -81 V
--6 -80 V
--6 -81 V
--6 -80 V
--6 -81 V
--5 -80 V
--6 -81 V
--5 -80 V
--4 -81 V
--4 -80 V
--3 -81 V
--2 -80 V
--1 -81 V
--1 -80 V
-1 -80 V
-1 -81 V
-3 -80 V
-3 -81 V
-4 -80 V
-5 -81 V
-6 -80 V
-6 -81 V
-6 -80 V
-7 -81 V
-7 -80 V
-7 -81 V
-6 -80 V
-6 -81 V
-6 -81 V
-5 -80 V
-4 -81 V
-3 -80 V
-2 -81 V
-2 -80 V
-stroke
-LT4
-1628 4050 M
--2 -81 V
--3 -80 V
--5 -81 V
--6 -80 V
--7 -81 V
--6 -65 V
--2 -16 V
--9 -80 V
--9 -81 V
--9 -80 V
--9 -81 V
--9 -80 V
--9 -81 V
--8 -80 V
--7 -81 V
--5 -80 V
--5 -81 V
--3 -80 V
--2 -81 V
--1 -80 V
-1 -80 V
-3 -81 V
-4 -80 V
-5 -81 V
-6 -80 V
-8 -81 V
-8 -80 V
-9 -81 V
-10 -80 V
-11 -81 V
-10 -80 V
-11 -81 V
-1 -5 V
-9 -75 V
-10 -81 V
-9 -81 V
-7 -80 V
-7 -81 V
-5 -80 V
-3 -81 V
-2 -80 V
-stroke
-LT5
-1809 4050 M
--2 -81 V
--5 -80 V
--6 -81 V
--8 -80 V
--10 -81 V
--12 -81 V
--12 -80 V
--13 -81 V
--13 -80 V
--4 -26 V
--9 -55 V
--13 -80 V
--11 -81 V
--11 -80 V
--10 -81 V
--8 -80 V
--6 -81 V
--5 -80 V
--2 -81 V
--1 -80 V
-1 -80 V
-3 -81 V
-6 -80 V
-7 -81 V
-9 -80 V
-10 -81 V
-12 -80 V
-13 -81 V
-14 -80 V
-1 -5 V
-13 -76 V
-15 -80 V
-15 -81 V
-14 -80 V
-14 -81 V
-12 -81 V
-11 -80 V
-9 -81 V
-7 -80 V
-5 -81 V
-2 -80 V
-stroke
-LT6
-1996 4050 M
--3 -81 V
--7 -80 V
--8 -81 V
--4 -26 V
--8 -54 V
--13 -81 V
--15 -81 V
--16 -80 V
--17 -81 V
--18 -80 V
--17 -81 V
--17 -80 V
--4 -22 V
--12 -59 V
--14 -80 V
--12 -81 V
--11 -80 V
--8 -81 V
--6 -80 V
--4 -81 V
--1 -80 V
-2 -80 V
-4 -81 V
-7 -80 V
-9 -81 V
-12 -80 V
-13 -81 V
-16 -80 V
-5 -23 V
-12 -58 V
-18 -80 V
-20 -81 V
-19 -80 V
-20 -81 V
-19 -80 V
-17 -78 V
-1 -3 V
-16 -81 V
-15 -80 V
-12 -81 V
-10 -80 V
-6 -81 V
-4 -80 V
-stroke
-LT7
-2189 4050 M
--4 -81 V
--7 -80 V
--12 -81 V
--15 -80 V
--17 -81 V
--20 -81 V
--15 -54 V
--7 -26 V
--22 -81 V
--23 -80 V
--22 -81 V
--21 -80 V
--21 -81 V
--9 -42 V
--9 -38 V
--16 -81 V
--13 -80 V
--11 -81 V
--8 -80 V
--4 -81 V
--2 -80 V
-2 -80 V
-6 -81 V
-8 -80 V
-12 -81 V
-15 -80 V
-17 -81 V
-3 -11 V
-17 -69 V
-22 -81 V
-23 -80 V
-25 -81 V
-25 -80 V
-13 -41 V
-13 -40 V
-25 -80 V
-23 -81 V
-22 -81 V
-19 -80 V
-16 -81 V
-7 -49 V
-5 -31 V
-9 -81 V
-4 -80 V
-stroke
-LT8
-2394 4050 M
--6 -81 V
--10 -80 V
--15 -81 V
--14 -54 V
--6 -26 V
--22 -81 V
--26 -81 V
--27 -80 V
--29 -81 V
--15 -39 V
--14 -41 V
--29 -81 V
--27 -80 V
--25 -81 V
--23 -80 V
--7 -27 V
--14 -54 V
--17 -80 V
--13 -81 V
--10 -80 V
--5 -81 V
--2 -80 V
-3 -80 V
-6 -81 V
-11 -80 V
-14 -81 V
-19 -80 V
-8 -31 V
-13 -50 V
-25 -80 V
-28 -81 V
-29 -80 V
-30 -77 V
-2 -4 V
-32 -80 V
-33 -81 V
-31 -80 V
-27 -73 V
-3 -8 V
-29 -81 V
-25 -80 V
-21 -81 V
-16 -80 V
-11 -81 V
-5 -80 V
-stroke
-LT0
-2613 4050 M
--7 -81 V
--6 -34 V
--8 -46 V
--19 -81 V
--25 -80 V
--30 -81 V
--33 -81 V
--11 -22 V
--25 -58 V
--36 -81 V
--37 -80 V
--27 -58 V
--10 -23 V
--34 -80 V
--32 -81 V
--29 -80 V
--20 -65 V
--5 -16 V
--21 -80 V
--16 -81 V
--12 -80 V
--7 -81 V
--2 -80 V
-3 -80 V
-8 -81 V
-13 -80 V
-18 -81 V
-21 -76 V
-1 -4 V
-27 -81 V
-31 -80 V
-34 -81 V
-32 -70 V
-5 -10 V
-40 -81 V
-41 -80 V
-39 -78 V
-2 -3 V
-41 -80 V
-40 -81 V
-35 -81 V
-8 -18 V
-25 -62 V
-28 -81 V
-21 -80 V
-14 -81 V
-8 -80 V
-stroke
-LT1
-2856 4050 M
--6 -51 V
--4 -30 V
--17 -80 V
--26 -81 V
--33 -80 V
--40 -81 V
--5 -10 V
--38 -71 V
--46 -80 V
--41 -69 V
--7 -12 V
--46 -80 V
--46 -81 V
--27 -47 V
--17 -33 V
--40 -81 V
--36 -80 V
--30 -81 V
--2 -4 V
--24 -76 V
--20 -81 V
--15 -80 V
--8 -81 V
--3 -80 V
-4 -80 V
-9 -81 V
-16 -80 V
-21 -81 V
-20 -59 V
-8 -21 V
-32 -81 V
-38 -80 V
-43 -81 V
-4 -8 V
-43 -72 V
-50 -81 V
-33 -51 V
-19 -29 V
-54 -81 V
-52 -79 V
-0 -1 V
-53 -81 V
-47 -81 V
-25 -48 V
-18 -32 V
-37 -81 V
-28 -80 V
-19 -81 V
-10 -80 V
-stroke
-LT2
-5977 4050 M
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-0 -81 V
-0 -80 V
-3142 4050 M
--13 -81 V
--26 -80 V
--3 -7 V
--32 -74 V
--45 -80 V
--48 -70 V
--7 -11 V
--57 -81 V
--61 -78 V
--1 -2 V
--62 -81 V
--62 -80 V
-0 -1 V
--58 -80 V
--56 -80 V
--11 -18 V
--39 -63 V
--44 -80 V
--38 -81 V
--5 -12 V
--26 -68 V
--25 -81 V
--17 -80 V
--11 -81 V
--3 -80 V
-4 -80 V
-12 -81 V
-18 -80 V
-26 -81 V
-22 -54 V
-11 -26 V
-40 -81 V
-47 -80 V
-28 -43 V
-26 -38 V
-59 -80 V
-40 -52 V
-24 -29 V
-68 -80 V
-33 -40 V
-38 -41 V
-70 -80 V
-17 -22 V
-53 -59 V
-65 -81 V
-7 -10 V
-53 -70 V
-51 -81 V
-21 -45 V
-19 -35 V
-29 -81 V
-14 -80 V
-stroke
-LT3
-5336 4050 M
-8 -81 V
-7 -35 V
-8 -45 V
-21 -81 V
-24 -80 V
-28 -81 V
-29 -81 V
-15 -43 V
-13 -37 V
-27 -81 V
-25 -80 V
-24 -81 V
-21 -80 V
-15 -67 V
-3 -14 V
-17 -80 V
-13 -81 V
-11 -80 V
-8 -81 V
-6 -80 V
-3 -81 V
-1 -80 V
--1 -80 V
--5 -81 V
--6 -80 V
--10 -81 V
--12 -80 V
--15 -81 V
--13 -56 V
--5 -24 V
--21 -81 V
--24 -80 V
--28 -81 V
--31 -80 V
--16 -40 V
--17 -41 V
--37 -80 V
--39 -81 V
--32 -68 V
--7 -13 V
--39 -80 V
--37 -81 V
--31 -80 V
--11 -41 V
--12 -40 V
--13 -80 V
-3523 4050 M
--21 -81 V
--27 -50 V
--13 -30 V
--55 -81 V
--57 -62 V
--14 -18 V
--77 -81 V
--34 -29 V
--50 -52 V
--75 -66 V
--13 -14 V
--85 -81 V
--27 -23 V
--55 -57 V
--70 -71 V
--9 -10 V
--70 -80 V
--46 -57 V
--18 -24 V
--55 -80 V
--47 -81 V
--5 -11 V
--34 -69 V
--29 -81 V
--21 -80 V
--12 -81 V
--4 -80 V
-5 -80 V
-13 -81 V
-22 -80 V
-31 -81 V
-29 -58 V
-11 -22 V
-49 -81 V
-59 -80 V
-6 -8 V
-62 -73 V
-63 -68 V
-12 -12 V
-85 -81 V
-28 -27 V
-64 -53 V
-61 -54 V
-36 -27 V
-89 -72 V
-12 -8 V
-102 -81 V
-11 -10 V
-91 -71 V
-34 -32 V
-61 -48 V
-64 -65 V
-19 -16 V
-70 -80 V
-36 -63 V
-12 -18 V
-28 -80 V
-stroke 3765 910 M
-stroke
-LT4
-4851 3581 M
--88 66 V
--37 29 V
--90 52 V
--36 22 V
--125 50 V
--40 8 V
--85 20 V
--125 1 V
--100 -21 V
--25 -4 V
--125 -36 V
--95 -40 V
--30 -10 V
--125 -56 V
--26 -15 V
--99 -46 V
--59 -35 V
--66 -31 V
--80 -49 V
--45 -24 V
--88 -57 V
--37 -21 V
--83 -59 V
--42 -28 V
--65 -53 V
--60 -47 V
--36 -33 V
--83 -81 V
--6 -6 V
--64 -74 V
--58 -81 V
--3 -5 V
--44 -75 V
--36 -81 V
--24 -80 V
--14 -81 V
--4 -80 V
-5 -80 V
-15 -81 V
-25 -80 V
-38 -81 V
-39 -65 V
-9 -15 V
-61 -81 V
-55 -61 V
-19 -19 V
-87 -81 V
-19 -16 V
-84 -64 V
-41 -32 V
-78 -49 V
-47 -32 V
-88 -48 V
-37 -23 V
-118 -58 V
-7 -4 V
-125 -57 V
-55 -19 V
-70 -30 V
-125 -41 V
-45 -10 V
-80 -23 V
-125 -23 V
-125 -11 V
-125 4 V
-125 20 V
-107 33 V
-18 5 V
-126 56 V
-31 20 V
-94 57 V
-29 23 V
-96 80 V
-0 1 V
-79 80 V
-46 54 V
-20 27 V
-56 80 V
-46 81 V
-3 6 V
-36 74 V
-32 81 V
-25 80 V
-20 81 V
-12 76 V
-1 4 V
-9 81 V
-3 80 V
--2 80 V
--7 81 V
--4 25 V
--8 55 V
--17 81 V
--23 80 V
--29 81 V
--35 80 V
--13 27 V
--28 54 V
--49 80 V
--48 71 V
--8 10 V
--65 80 V
--52 59 V
--23 22 V
-stroke 4953 3486 M
--87 80 V
--15 15 V
-stroke
-LT5
-3725 3418 M
--41 -13 V
--84 -21 V
--125 -43 V
--35 -16 V
--90 -36 V
--84 -45 V
--41 -19 V
--98 -61 V
--27 -16 V
--85 -65 V
--40 -31 V
--52 -49 V
--73 -81 V
--58 -80 V
--43 -81 V
--24 -69 V
--4 -11 V
--18 -81 V
--5 -80 V
-6 -80 V
-18 -81 V
-3 -6 V
-27 -74 V
-44 -81 V
-54 -73 V
-6 -7 V
-77 -81 V
-42 -39 V
-54 -41 V
-71 -52 V
-49 -29 V
-76 -46 V
-75 -34 V
-50 -26 V
-125 -48 V
-23 -7 V
-102 -34 V
-125 -29 V
-109 -17 V
-16 -3 V
-125 -12 V
-125 0 V
-125 13 V
-11 2 V
-114 21 V
-125 40 V
-44 19 V
-81 38 V
-71 43 V
-55 37 V
-54 43 V
-71 67 V
-12 14 V
-67 80 V
-46 72 V
-5 9 V
-41 80 V
-31 81 V
-21 80 V
-12 81 V
-5 80 V
--3 80 V
--11 81 V
--19 80 V
--28 81 V
--37 80 V
--17 30 V
--31 51 V
--60 80 V
--34 39 V
--41 42 V
--84 73 V
--11 7 V
--115 75 V
--10 6 V
--115 55 V
--77 25 V
--48 16 V
--125 26 V
--125 11 V
--125 -2 V
--125 -14 V
--125 -24 V
-stroke
-LT6
-3725 3256 M
--64 -12 V
--61 -9 V
--125 -32 V
--107 -39 V
--18 -6 V
--125 -56 V
--31 -19 V
--94 -55 V
--33 -25 V
--92 -77 V
--4 -4 V
--72 -80 V
--49 -77 V
--2 -4 V
--36 -80 V
--19 -81 V
--5 -80 V
-6 -80 V
-20 -81 V
-36 -79 V
-0 -1 V
-53 -81 V
-72 -78 V
-2 -2 V
-100 -81 V
-23 -17 V
-110 -63 V
-15 -9 V
-125 -56 V
-52 -16 V
-73 -26 V
-125 -30 V
-125 -19 V
-70 -5 V
-55 -5 V
-125 2 V
-29 3 V
-96 9 V
-125 26 V
-125 43 V
-5 2 V
-120 59 V
-36 22 V
-89 66 V
-18 14 V
-79 81 V
-29 39 V
-29 41 V
-43 81 V
-29 80 V
-17 81 V
-6 80 V
--4 80 V
--15 81 V
--27 80 V
--40 81 V
--38 56 V
--17 24 V
--73 81 V
--36 31 V
--63 49 V
--62 40 V
--78 41 V
--47 22 V
--125 42 V
--79 16 V
--46 10 V
--125 13 V
--125 1 V
--125 -12 V
-stroke
-LT7
-3475 3094 M
--32 -11 V
--93 -26 V
--122 -54 V
--3 -1 V
--125 -76 V
--5 -4 V
--92 -80 V
--28 -34 V
--36 -47 V
--41 -80 V
--20 -81 V
--6 -80 V
-7 -80 V
-21 -81 V
-42 -80 V
-33 -43 V
-32 -38 V
-93 -79 V
-1 -1 V
-124 -74 V
-16 -7 V
-109 -47 V
-119 -33 V
-6 -2 V
-125 -26 V
-125 -13 V
-125 -2 V
-125 11 V
-125 26 V
-18 6 V
-107 35 V
-93 45 V
-32 19 V
-88 62 V
-37 35 V
-45 45 V
-57 81 V
-23 51 V
-15 29 V
-22 81 V
-8 80 V
--6 80 V
--21 81 V
--18 39 V
--18 41 V
--54 81 V
--53 56 V
--25 24 V
--100 73 V
--13 8 V
--112 56 V
--71 24 V
--54 18 V
--125 25 V
--125 10 V
--125 -2 V
--125 -14 V
--125 -26 V
-stroke
-LT8
-3475 3005 M
--7 -2 V
--118 -30 V
--117 -51 V
--8 -3 V
--119 -77 V
--6 -5 V
--74 -76 V
--46 -80 V
--5 -20 V
--17 -61 V
--7 -80 V
-7 -80 V
-17 -57 V
-6 -24 V
-47 -80 V
-72 -73 V
-10 -8 V
-115 -74 V
-16 -6 V
-109 -47 V
-125 -31 V
-20 -3 V
-105 -18 V
-125 -8 V
-125 5 V
-125 20 V
-3 1 V
-122 36 V
-95 45 V
-30 17 V
-88 63 V
-37 39 V
-38 42 V
-47 80 V
-25 81 V
-9 80 V
--7 80 V
--24 81 V
--46 80 V
--42 48 V
--30 33 V
--95 70 V
--18 10 V
--107 52 V
--97 29 V
--28 8 V
--125 20 V
--125 4 V
--125 -8 V
--125 -22 V
-stroke
-LT0
-3475 2931 M
--36 -9 V
--89 -18 V
--125 -54 V
--12 -8 V
--104 -81 V
--9 -11 V
--50 -69 V
--20 -81 V
--6 -80 V
-6 -80 V
-21 -81 V
-49 -67 V
-11 -13 V
-105 -81 V
-9 -5 V
-125 -54 V
-102 -21 V
-23 -6 V
-125 -17 V
-125 -4 V
-125 10 V
-75 17 V
-50 11 V
-125 54 V
-27 15 V
-98 81 V
-0 1 V
-59 79 V
-28 81 V
-9 80 V
--8 80 V
--27 81 V
--58 80 V
--3 3 V
--92 78 V
--33 19 V
--125 54 V
--33 7 V
--92 21 V
--125 10 V
--125 -5 V
--125 -17 V
-stroke
-LT1
-3350 2845 M
--8 -3 V
--117 -52 V
--39 -29 V
--70 -80 V
--16 -81 V
-0 -1 V
--5 -79 V
-5 -75 V
-0 -5 V
-17 -81 V
-71 -80 V
-37 -28 V
-120 -53 V
-5 -2 V
-125 -23 V
-125 -11 V
-125 -2 V
-125 11 V
-89 27 V
-36 12 V
-113 69 V
-12 13 V
-59 67 V
-26 81 V
-8 80 V
--7 80 V
--26 81 V
--60 69 V
--10 11 V
--115 71 V
--30 10 V
--95 29 V
--125 11 V
--125 -2 V
--125 -11 V
--125 -24 V
-stroke
-LT2
-3350 2803 M
--83 -42 V
--42 -27 V
--54 -53 V
--8 -81 V
--3 -80 V
-3 -80 V
-8 -81 V
-54 -53 V
-43 -27 V
-82 -41 V
-125 -10 V
-125 -6 V
-125 0 V
-125 6 V
-117 51 V
-8 5 V
-84 75 V
-15 81 V
-5 80 V
--4 80 V
--15 81 V
--85 76 V
--7 4 V
--118 51 V
--125 7 V
--125 0 V
--125 -6 V
--125 -10 V
+LC0 setrgbcolor
+%%%%BeginImage
+gsave 1098 4130 N 1098 910 L 6102 910 L 6102 4130 L Z clip
+InterpretLevel1 {
+  %% Construct a box instead of image
+  LTb
+  1072 4082 M
+  4955 0 V
+  0 -3189 V
+  -4955 0 V
+  1072 4082 L
+  40 -110 R
+  (PS level 2 image) Lshow
+  % Read data but ignore it
+  /imagebuf 12411 string def
+  currentfile imagebuf readstring
+} {
+  gsave
+  1072 4082 translate
+  4955 -3189 scale
+  99 99 8
+  [ 99 0 0 99 0 0 ]
+  currentfile /ASCII85Decode filter
+  image
+} ifelse
+.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.OlqJs8W-!s8W-!s8W
+-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W
+-!s8W-!.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Oln
+t.Olnt.OtJus8W-!s8W-!s8W-!s8W-!.Olnt.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8
+W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!
+s8OPu.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s!fKJ.Ol
+nt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.OtJus8W-!s
+8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-
+!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8
+W-!s!fKJ.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt
+.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s!fKJ.Olnt.OlqJs8W-!s8W-!s8W-!s8W-!s8W-!s
+8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-
+!s8W-!s!fKJ.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s!fKJ.Olnt.f]PKs8W-!s8W-!
+s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s8W
+-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olq
+Js8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.f
+]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!
+s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W
+-!s8W-!s8W*K.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPus8W-!s8W-!s8W-!s8W-
+!s8W-!s8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s8W-!s8
+W-!s8W-!s8W-!s8W-!s8W-!s!fMus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.OtJus8W
+-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs
+8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-
+!s8OPu.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8
+W-!s8OPus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.OlqJs8W-!s8W-!s8W-!s8W-!s8W
+-!s8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s
+8W-!s8W-!s8W-!s!fKJ.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.f]PKs8W-!s8
+W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!
+s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W
+*K.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.
+OlqJs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.Olq
+Js8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8
+W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8W-!s8W-!s8W-!
+s!fKJ.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Ol
+nt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s
+8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!s8W-!s8W-
+!s8W-!s8W-!.Olnt.Olnt.Olnt.Olnts8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8
+OPu.Olnt.Olnt.Olnt.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.Olnt
+.Olnt.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W
+-!s8W-!s8W-!s8W-!s!fKJ.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s8W-!s8W-!s
+8W-!s8W*K.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OtJus8W-!s8W-!.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s8W-!s8OPu.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Ol
+nt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.
+Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Oln
+t.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.O
+lnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt
+.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.Olnt.OlqJs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W
+-!s8W-!s8W-!s8W-!s!fKJ.f]PKs8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s8W-!s
+8W-!.K~>
+InterpretLevel1 not {
+  grestore
+} if
+grestore
+%%%%EndImage
 % End plot #1
-stroke
+1.000 UL
 LTb
 1098 4130 N
 0 -3220 V
@@ -1632,6 +705,56 @@ Z stroke
 1.000 UL
 LTb
 1098 910 M
+0 82 V
+0 -264 R
+(-10) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+1098 4130 M
+0 -82 V
+1599 910 M
+0 82 V
+0 -264 R
+(-8) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+1599 4130 M
+0 -82 V
+2099 910 M
+0 82 V
+0 -264 R
+(-6) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+2099 4130 M
+0 -82 V
+2600 910 M
+0 82 V
+0 -264 R
+(-4) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+2600 4130 M
+0 -82 V
+3100 910 M
+0 82 V
+0 -264 R
+(-2) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+3100 4130 M
+0 -82 V
+3600 910 M
 0 82 V
 0 -264 R
 ( 0) Cshow
@@ -1639,82 +762,52 @@ LTb
 LTb
 1.000 UL
 LTb
-1098 4130 M
-0 -82 V
-1724 910 M
-0 82 V
-0 -264 R
-( 5) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTb
-1724 4130 M
-0 -82 V
-2349 910 M
-0 82 V
-0 -264 R
-( 10) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTb
-2349 4130 M
-0 -82 V
-2975 910 M
-0 82 V
-0 -264 R
-( 15) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTb
-2975 4130 M
-0 -82 V
-3600 910 M
-0 82 V
-0 -264 R
-( 20) Cshow
-1.000 UL
-LTb
-1.000 UL
-LTb
 3600 4130 M
 0 -82 V
-4225 910 M
+4100 910 M
 0 82 V
 0 -264 R
-( 25) Cshow
+( 2) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-4225 4130 M
+4100 4130 M
 0 -82 V
-4851 910 M
+4600 910 M
 0 82 V
 0 -264 R
-( 30) Cshow
+( 4) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-4851 4130 M
+4600 4130 M
 0 -82 V
-5476 910 M
+5101 910 M
 0 82 V
 0 -264 R
-( 35) Cshow
+( 6) Cshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-5476 4130 M
+5101 4130 M
+0 -82 V
+5601 910 M
+0 82 V
+0 -264 R
+( 8) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+5601 4130 M
 0 -82 V
 6102 910 M
 0 82 V
 0 -264 R
-( 40) Cshow
+( 10) Cshow
 1.000 UL
 LTb
 1.000 UL
@@ -1724,87 +817,107 @@ LTb
 1098 910 M
 82 0 V
 -191 0 R
-( 0) Rshow
+(-10) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
 6102 910 M
 -82 0 V
-1098 1312 M
+1098 1232 M
 82 0 V
 -191 0 R
-( 5) Rshow
+(-8) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-6102 1312 M
+6102 1232 M
 -82 0 V
-1098 1715 M
+1098 1554 M
 82 0 V
 -191 0 R
-( 10) Rshow
+(-6) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-6102 1715 M
+6102 1554 M
 -82 0 V
-1098 2118 M
+1098 1876 M
 82 0 V
 -191 0 R
-( 15) Rshow
+(-4) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-6102 2118 M
+6102 1876 M
+-82 0 V
+1098 2198 M
+82 0 V
+-191 0 R
+(-2) Rshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+6102 2198 M
 -82 0 V
 1098 2520 M
 82 0 V
 -191 0 R
-( 20) Rshow
+( 0) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
 6102 2520 M
 -82 0 V
-1098 2922 M
+1098 2842 M
 82 0 V
 -191 0 R
-( 25) Rshow
+( 2) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-6102 2922 M
+6102 2842 M
 -82 0 V
-1098 3325 M
+1098 3164 M
 82 0 V
 -191 0 R
-( 30) Rshow
+( 4) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-6102 3325 M
+6102 3164 M
 -82 0 V
-1098 3728 M
+1098 3486 M
 82 0 V
 -191 0 R
-( 35) Rshow
+( 6) Rshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-6102 3728 M
+6102 3486 M
+-82 0 V
+1098 3808 M
+82 0 V
+-191 0 R
+( 8) Rshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+6102 3808 M
 -82 0 V
 1098 4130 M
 82 0 V
 -191 0 R
-( 40) Rshow
+( 10) Rshow
 1.000 UL
 LTb
 1.000 UL
@@ -1818,7 +931,85 @@ stroke
 0 3220 V
 -5004 0 V
 Z stroke
+stroke gsave	%% draw gray scale smooth box
+maxcolors 0 gt {/imax maxcolors def} {/imax 1024 def} ifelse
+6227 910 translate 250 3220 scale 0 setlinewidth
+/ystep 1 imax div def /y0 0 def /ii 0 def
+{ y0 g 0 y0 N 1 0 V 0 ystep V -1 0 f
+/y0 y0 ystep add def /ii ii 1 add def
+ii imax ge {exit} if } loop
+grestore 0 setgray
+1.000 UL
+LTb
+6227 910 N
+250 0 V
+0 3220 V
+-250 0 V
+0 -3220 V
+Z stroke
+1.000 UL
+LTb
+1.000 UL
+LTb
+6477 910 M
+-63 0 V
+147 0 R
+(-0.2) Lshow
+1.000 UL
+LTb
+6227 910 M
+63 0 V
+187 536 R
+-63 0 V
+147 0 R
+( 0) Lshow
+1.000 UL
+LTb
+6227 1446 M
+63 0 V
+187 537 R
+-63 0 V
+147 0 R
+( 0.2) Lshow
+1.000 UL
+LTb
+6227 1983 M
+63 0 V
+187 537 R
+-63 0 V
+147 0 R
+( 0.4) Lshow
+1.000 UL
+LTb
+6227 2520 M
+63 0 V
+187 536 R
+-63 0 V
+147 0 R
+( 0.6) Lshow
+1.000 UL
+LTb
+6227 3056 M
+63 0 V
+187 537 R
+-63 0 V
+147 0 R
+( 0.8) Lshow
+1.000 UL
+LTb
+6227 3593 M
+63 0 V
+187 537 R
+-63 0 V
+147 0 R
+( 1) Lshow
+1.000 UL
+LTb
+6227 4130 M
+63 0 V
 1.000 UP
+stroke
+grestore % colour palette end
 stroke
 grestore
 end
