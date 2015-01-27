@@ -22,6 +22,7 @@ public:
   Sublayer(int, int, double, double, double, double, double, int);
 };
 
+
 // Constructor function to create the submatrix
 // Takes as input the grid co-ordinates, the value of the point
 // on the top layer, the values of the adjacent points,
@@ -92,6 +93,21 @@ public:
   array[size-1][0] = ( below + left ) / 2.0;
   array[size-1][size-1] = ( below + right) / 2.0;
 
+}
+
+
+// Function to create a sublayer for a given point in the top layer
+// Takes as input the x and y co-ordiantes, the array containing the top layer,
+// and opltionally how many layers deep this is (for sublayers within sublayers)
+// Returns a pointer to a matrix containing the data
+// Function will break if used on top, bottom, leftmost or rightmost points
+double* sublayer(int row, int column, double** toplayer)
+{
+  Sublayer Temporary(row, column, toplayer[row][column],
+		     toplayer[row-1][column], toplayer[row+1][column],
+		     toplayer[row][column-1], toplayer[row][column+1]);
+  double* pointer = Temporary;
+  return temporary;
 }
 
 #endif
