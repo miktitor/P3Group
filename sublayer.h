@@ -26,10 +26,10 @@ public:
 // Constructor function to create the submatrix
 // Takes as input the grid co-ordinates, the value of the point
 // on the top layer, the values of the adjacent points,
-// and optionally grid size (number of points to a side)
+// and grid size (number of points to a side)
   Sublayer::Sublayer(int xpoint, int ypoint, double self,
 		     double above, double below, double left, double right,
-		     int gridsize = 8)
+		     int gridsize)
 {
   using namespace std;
 
@@ -43,9 +43,9 @@ public:
   // and this is the workaround I found
   array = new double*[size];
 
-  for (int x = 0; x < size; x++)
+  for (int r = 0; r < size; r++)
     {
-      array[x] = new double[size];
+      array[r] = new double[size];
     }
 
   // Define the submatrix's initial values
@@ -101,13 +101,14 @@ public:
 // and opltionally how many layers deep this is (for sublayers within sublayers)
 // Returns a pointer to a matrix containing the data
 // Function will break if used on top, bottom, leftmost or rightmost points
-double* sublayer(int row, int column, double** toplayer)
+Sublayer* sublayer(int column, int row, double** toplayer, int size = 13)
 {
-  Sublayer Temporary(row, column, toplayer[row][column],
+  Sublayer Temporary(column, row, toplayer[row][column],
 		     toplayer[row-1][column], toplayer[row+1][column],
-		     toplayer[row][column-1], toplayer[row][column+1]);
-  double* pointer = Temporary;
-  return temporary;
+		     toplayer[row][column-1], toplayer[row][column+1],
+		     size);
+  Sublayer *pointer = &Temporary;
+  return pointer;
 }
 
 #endif
