@@ -1,20 +1,46 @@
 # Pseudocode for finite difference algorithm to solve electric field
 
 command line arguments:
-[X Min][dX][X Max][Y Min][dy][Y Max][Iterations][Conductor Read-in Filename]
+[X Min][dX][X Max][Y Min][dy][Y Max][Iterations][Type of output]
 
-read in text file containing coordinates of conductors as follows:
-[X centre][Y centre][Radius][Potential]
+#Read in system setup (i.e where the conductors go, potentials of plates etc.)
 
 #Get size of matrix needed for algorithm
 xsize = (xmax-xmin)/dx - remainder of (xmax-xmin)/dx
 ysize = (ymax-ymin)/dy - remainder of (ymax-ymin)/dy
 
-#Create values matrix (needs to be 2 deep for algorithm iteration)
-MATRIX vals[xsize][ysize][2]
+#Initialise values matrix (needs to be 3 deep for algorithm iteration and gradient check))
+MATRIX vals[xsize][ysize][3]
 
-use .fld ('field') file extension with specific syntax (@ denotes line end)
+#### Note on matrix syntax ####
+# For this pseudocode, we're going to use the following syntax
+#
+# [a][b][c]
+# [d][e][f]
+# [g][h][i]
+#
+# Let 'e' be the current value in the matrix being considered. Then:
+# b = 'up'
+# h = 'down'
+# d = 'left'
+# f = 'right'
+#
+###############################
 
-SAMPLE: "example.fld"
-size x y @
-divs dx dy @
+
+For each iteration (i from 0 to iter)
+  For each row of matrix (r from 0 to xsize-1)
+    For each element of row (c from 0 to ysize-1)
+    
+    #Since we've only got 2 layers to work with, we alternate the layer being inputted to.
+    layer = -(i%2)+1
+    # i%2 is the remainder when i is divided by 2 (same as i mod 2)    
+
+    #Here we check if the value being considered is at the edge of the matrix
+    if corner value #(e.g. vals(0,0))
+      vals[row][column][layer] = ((left or right)+(up or down))/2 #depending on precise corner
+    else if edge value
+      vals[row][column][layer] = (3 valid values)/3
+    else
+      vals[row][column][layer] = (left+right+up+down)/4
+    end if

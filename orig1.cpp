@@ -75,7 +75,7 @@ for(i=0;i<iter;i++) {
 	vals[row][column][-(i%2)+1] = (left+right+down)/3.00;
 	vals[row][column][2] = grad(right,left,0,down,ds);
       }
-      else if(row==0 || row==matsize-1) {
+      else if(row==matsize-1) {
 	vals[row][column][-(i%2)+1] = (left+right+up)/3.00;
 	vals[row][column][2] = grad(right,left,up,0,ds);
       }
@@ -95,7 +95,6 @@ datafile.open("the_datafile.dat");
 
 for(row=0;row<matsize;row++) {
   for(column=0;column<matsize;column++) {
-    cout<<"File Iter: "<<row<<"\r";
     if(index==0){
       //gradient test. see function 'grad' for more info.
       datafile<<cf(row,smin,ds)<<" "<<cf(column,smin,ds)<<" "<<vals[row][column][2]<<"\n";
@@ -140,10 +139,10 @@ float grad(float right,float left,float up,float down,float ds){
   }*/
 
   if (result>0.25){
-      return result;
+      return 1;
     }
     else{
-      return result;
+      return 0;
     }
   
 }
