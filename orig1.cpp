@@ -95,7 +95,7 @@ datafile.open("the_datafile.dat");
 
 for(row=0;row<matsize;row++) {
   for(column=0;column<matsize;column++) {
-    
+    cout<<"File Iter: "<<row<<"\r";
     if(index==0){
       //gradient test. see function 'grad' for more info.
       datafile<<cf(row,smin,ds)<<" "<<cf(column,smin,ds)<<" "<<vals[row][column][2]<<"\n";
@@ -140,10 +140,10 @@ float grad(float right,float left,float up,float down,float ds){
   }*/
 
   if (result>0.25){
-      return 1;
+      return result;
     }
     else{
-      return 0;
+      return result;
     }
   
 }
