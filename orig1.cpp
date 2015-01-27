@@ -128,16 +128,9 @@ float cf(float matind,float min,float ds){
 
 //Check on gradient. Returns a value based on 4 surrounding points (needs some tweaking in order to calibrate tolerance)
 float grad(float right,float left,float up,float down,float ds){
+  
   float result = pow(pow((right-left)/ds,2.00)+pow((down-up)/ds,2.00),0.50);
   
-  /*for now, return result to see values
-  if(result>100 || result<0.001){
-    return 0;
-  }
-  else{
-    return result;
-  }*/
-
   if (result>0.25){
       return 1;
     }
