@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <fstream>
 #include <cmath>
-#include "sublayer.h"
+#include "./sublayer/sublayer.h"
 #include "funcs.h"
+#include "timer.h"
 //#include "./fieldline/fieldline.h"
 
 using namespace std;
@@ -133,7 +134,7 @@ datafile.open("the_datafile.dat");
 
 for(row=0;row<matsize;row++) {
   for(column=0;column<matsize;column++) {
-    cout<<"File Iter: "<<row<<"\r";
+    //cout<<"File Iter: "<<row<<"\r";
     if(index==0){
       //gradient test. see function 'grad' for more info.
       datafile<<cf(row,smin,ds)<<" "<<cf(column,smin,ds)<<" "<<vals[row][column][2]<<"\n";
@@ -153,6 +154,8 @@ for(row=0;row<matsize;row++) {
 
 
 datafile.close(); 
+
+timer(1);
 
 
 return 0;
